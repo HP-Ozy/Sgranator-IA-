@@ -4,12 +4,6 @@
 
 Un **Denoising Autoencoder** costruito da zero con PyTorch che pulisce foto sgranate e rumorose. Risultati visivi immediati, perfetto per imparare come funzionano le reti neurali applicati a problemi reali.
 
-<p align="center">
-  <img src="assets/demo_banner.png" alt="Demo Banner" width="700">
-  <br>
-  <em>Sinistra: foto rumorosa | Centro: originale | Destra: output del modello</em>
-</p>
-
 ---
 
 ## 🎯 Cosa fa

@@ -26,8 +26,6 @@ L'**encoder** comprime l'immagine scartando le informazioni meno importanti (inc
 | **Autoencoder** | ~590K | Veloce, semplice, ottimo per imparare | Perde dettagli fini |
 | **U-Net** | ~7.7M | Skip connections preservano i dettagli | Più lento, più VRAM |
 
-## 🚀 Quick Start
-
 ### 1. Setup
 
 ```bash
@@ -70,7 +68,7 @@ python denoise.py --input ./foto_rumorose/ --output ./foto_pulite/
 python denoise.py --input foto.jpg --compare
 ```
 
-## 🔊 Tipi di rumore supportati
+## Tipi di rumore supportati
 
 Il progetto supporta 4 tipi di rumore, ognuno simula un problema reale:
 
@@ -87,25 +85,7 @@ python train.py --noise-type salt_pepper --noise-level 0.08
 python train.py --noise-type gaussian --noise-level 0.2
 ```
 
-## 📂 Struttura del progetto
-
-```
-pytorch-photo-denoiser/
-├── models/
-│   ├── __init__.py
-│   └── autoencoder.py      # 🧠 Architetture: Autoencoder + U-Net
-├── utils/
-│   ├── __init__.py
-│   ├── noise.py             # 🔊 Funzioni di rumore e dataset
-│   └── visualization.py     # 📊 Grafici e metriche (PSNR, SSIM)
-├── train.py                 # 🏋️ Script di training
-├── denoise.py               # 🧹 Script di inferenza
-├── demo.py                  # 🚀 Demo rapida
-├── requirements.txt
-└── README.md
-```
-
-## 📊 Metriche
+##  Metriche
 
 Il modello viene valutato con:
 

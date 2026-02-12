@@ -116,37 +116,3 @@ Risultati tipici dopo 30 epoche su CIFAR-10 (rumore gaussiano, σ=0.1):
 | `--lr` | `0.001` | Learning rate |
 | `--output-dir` | `./checkpoints` | Dove salvare il modello |
 
-## 🤔 Limitazioni (e cosa imparare da esse)
-
-Questo progetto è pensato per **imparare**, quindi ha limiti voluti:
-
-1. **Risoluzione bassa** — Il modello lavora a 128x128. Per risoluzioni maggiori servono architetture più complesse (diffusion models, etc.)
-2. **Rumore artificiale** — Il modello è addestrato su rumore sintetico. Il rumore reale delle fotocamere è più complesso e variegato.
-3. **Nessun rumore specifico** — Un modello professionale sarebbe addestrato su coppie di foto reali (con/senza rumore) dello stesso sensore.
-4. **Perdita di dettagli** — L'autoencoder base tende a "sfocare" leggermente. La U-Net è meglio grazie alle skip connections.
-
-**Prossimi passi per chi vuole andare oltre:**
-- Implementare le Perceptual Loss (confronto nello spazio delle feature, non dei pixel)
-- Provare architetture residuali (DnCNN)
-- Usare dataset di rumore reale (SIDD, DND)
-- Aggiungere training con mixed noise (più tipi contemporaneamente)
-
-## 🖥️ Requisiti hardware
-
-| Hardware | Tempo per 20 epoche (CIFAR-10) | Note |
-|----------|-------------------------------|------|
-| GPU NVIDIA (RTX 3060+) | ~3-5 min | Consigliato |
-| Apple Silicon (M1/M2) | ~5-10 min | Supporto MPS |
-| Solo CPU | ~20-40 min | Funziona, ma lento |
-
-## 📜 Licenza
-
-MIT — Usa, modifica e condividi liberamente!
-
----
-
-<p align="center">
-  Fatto con ❤️ e PyTorch
-  <br><br>
-  ⭐ Se ti è utile, lascia una stella!
-</p>

@@ -6,7 +6,7 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 
 from models import DenoisingAutoencoder
-from utils import CIFAR10NoisyDataset, show_grid, calculate_psnr
+from utils import CIFAR10NoisyDataset, show_grid, calculate_psnr, calculate_ssim
 
 
 def main():
@@ -90,10 +90,13 @@ def main():
         psnr_noisy = calculate_psnr(clean_batch[:8], noisy_batch[:8].cpu())
         psnr_denoised = calculate_psnr(clean_batch[:8], denoised_batch[:8])
 
+        ssim_denoised = calculate_ssim(clean_batch[:8], denoised_batch[:8])
+
         print(f"\n📊 Metriche:")
         print(f"   PSNR rumorosa:  {psnr_noisy:.1f} dB")
         print(f"   PSNR denoisata: {psnr_denoised:.1f} dB")
         print(f"   Miglioramento:  +{psnr_denoised - psnr_noisy:.1f} dB ✨")
+        print(f"   SSIM denoisata: {ssim_denoised:.3f}")
 
         
         show_grid(

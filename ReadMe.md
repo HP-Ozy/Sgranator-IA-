@@ -23,14 +23,18 @@ L'**encoder** comprime l'immagine scartando le informazioni meno importanti (inc
 
 | Modello | Parametri | Pro | Contro |
 |---------|-----------|-----|--------|
-| **Autoencoder** | ~590K | Veloce, semplice, ottimo per imparare | Perde dettagli fini |
+| **Autoencoder** | ~1.1M | Veloce, semplice, ottimo per imparare | Perde dettagli fini |
 | **U-Net** | ~7.7M | Skip connections preservano i dettagli | Più lento, più VRAM |
+
+> Entrambi i modelli sono *size-preserving*: l'output ha sempre la stessa
+> risoluzione dell'input (per lati multipli di 8). In inferenza le immagini
+> di dimensione arbitraria vengono gestite con padding riflesso + crop.
 
 ### 1. Setup
 
 ```bash
-git clone https://github.com/tuo-username/pytorch-photo-denoiser.git
-cd pytorch-photo-denoiser
+git clone https://github.com/HP-Ozy/Sgranator-IA-.git
+cd Sgranator-IA-
 pip install -r requirements.txt
 ```
 
@@ -114,5 +118,34 @@ Risultati tipici dopo 30 epoche su CIFAR-10 (rumore gaussiano, σ=0.1):
 | `--epochs` | `20` | Numero di epoche |
 | `--batch-size` | `32` | Dimensione del batch |
 | `--lr` | `0.001` | Learning rate |
+| `--val-split` | `0.1` | Frazione usata per la validazione |
+| `--num-workers` | `0` | Worker del DataLoader (0 = sicuro su Windows) |
+| `--seed` | `42` | Seed per riproducibilità |
 | `--output-dir` | `./checkpoints` | Dove salvare il modello |
+
+Durante il training viene salvato automaticamente il **miglior** checkpoint
+(in base alla val loss) in `--output-dir/<model>.pth`, con LR scheduler e
+mixed precision (AMP) attivi su GPU.
+
+### denoise.py
+
+| Parametro | Default | Descrizione |
+|-----------|---------|-------------|
+| `--input` | *(obbligatorio)* | File immagine o cartella |
+| `--output` | auto | File/cartella di output |
+| `--model` | `autoencoder` | `autoencoder` o `unet` |
+| `--checkpoint` | `./checkpoints/<model>.pth` | Path del modello addestrato |
+| `--compare` | `False` | Salva confronto rumorosa \| pulita affiancate |
+
+## 📁 Struttura del progetto
+
+```
+.
+├── demo.py            # Demo 2 minuti su CIFAR-10
+├── train.py          # Training completo (cifar10 / custom)
+├── denoise.py        # Inferenza su immagini reali
+├── models.py         # DenoisingAutoencoder + U-Net
+├── utils.py          # Dataset, rumore, metriche (PSNR/SSIM), griglia
+└── requirements.txt
+```
 

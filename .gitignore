@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Dataset scaricati
+data/
+cifar-10-batches-py/
+*.tar.gz
+
+# Output / checkpoint
+checkpoints/
+*.pth
+*.pt
+demo_results.png
+*_denoised.png
+*_compare.png
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
